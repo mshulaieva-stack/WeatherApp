@@ -22,10 +22,12 @@ class MainWindow(QMainWindow):
         central = QWidget()
         self.setCentralWidget(central)
 
+        #центральний віджет нашого вікна
         root = QHBoxLayout(central)
         root.setContentsMargins(0, 0, 0, 0)
         root.setSpacing(0)
 
+        #створення лівої частини вікна
         self.cities_frame = CitiesFrame()
         self.cities_frame.setFixedWidth(LEFT_W)
         root.addWidget(self.cities_frame)
@@ -38,6 +40,7 @@ class MainWindow(QMainWindow):
         right_layout.setContentsMargins(MARGIN, MARGIN, MARGIN, MARGIN)
         right_layout.setSpacing(MARGIN)
 
+        #створення трьох блоків у правій частині вікна
         self.top_bar = self.make_frame(36)
         self.current_block = self.make_frame(272)
         self.forecast_block = self.make_frame(320)
@@ -46,6 +49,7 @@ class MainWindow(QMainWindow):
         right_layout.addWidget(self.current_block)
         right_layout.addWidget(self.forecast_block)
 
+    #функція, яка створює три однакові блоки з однаковим кольором
     def make_frame(self, height):
         block = QFrame()
         block.setFixedHeight(height)
