@@ -1,18 +1,21 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QLabel, QFrame, QGridLayout
+from PyQt6.QtGui import QFont
 
 class CityCard(QFrame):
     def __init__(self, city, time, condition, temp, t_max, t_min):
         super().__init__()
         
         self.setObjectName("Card")
-        self.setFixedHeight(84)
+        self.setFixedHeight(86)
+        #смуга внизу картки
+        self.setStyleSheet(" #Card {border-bottom: 1px solid rgba(255, 255, 255, 0.2); background: transparent; }")
         
         #створюємо та налаштовуємо позначку (назву) міста 
         self.name_label = QLabel(city)
         self.name_label.setStyleSheet("font-size: 21px; font-weight: 600; color: white;")
 
-        #створюємо позначку часу на картці
+        # позначка часу на картці
         self.time_label = QLabel(time)
         self.time_label.setStyleSheet("font-size: 11px; color: rgba(255, 255, 255, 0.8);")
         
@@ -23,8 +26,10 @@ class CityCard(QFrame):
         
         #позначка температури у місці
         self.temp_label = QLabel(f"{temp}°")
+        temp_font = QFont("Arial", 40) #налаштування шрифта для температури
+        self.temp_label.setFont(temp_font)
         self.temp_label.setAlignment(Qt.AlignmentFlag.AlignRight)
-        self.temp_label.setStyleSheet("font-size: 40px; font-weight: 600, color: white;")
+        self.temp_label.setStyleSheet("font-weight: 300; color: white;")
         
         #позначка діапазону від максимальнох до мінімальної погоди
         self.range_label = QLabel(f"Макс.: {t_max}°, мін.: {t_min}°")
@@ -33,7 +38,7 @@ class CityCard(QFrame):
         
         #створюємо сітку для того щоб помістити у такому порядку характеристики картки (назва міста, температура...)
         layout = QGridLayout(self)
-        layout.setContentsMargins(10, 6, 10, 6)
+        layout.setContentsMargins(12, 8, 12, 8)
         
         #додаємо картки на layout по індексам сітки
         layout.addWidget(self.name_label, 0, 0)
